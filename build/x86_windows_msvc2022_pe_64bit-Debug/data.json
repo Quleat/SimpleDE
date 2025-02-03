@@ -1,0 +1,13 @@
+[
+    "O:/Projects/Work/WorkAssgnment/Database/WorkersDB.db",
+    "id",
+    "FullName",
+    "Salary",
+    "password",
+    "nickname",
+    "int",
+    "text",
+    "int",
+    "text",
+    "text"
+]
