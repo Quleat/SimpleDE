@@ -6,8 +6,6 @@
 class TableModel
 {
 public:
-    static const int columns = 5;
-
     TableModel(QVector<QString>, int count);
     TableModel();
     int rowCount = 0;

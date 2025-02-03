@@ -2,7 +2,6 @@
 #define MAINCONTROLLER_H
 
 #include <QMainWindow>
-#include "tablemodel.h"
 #include "tableview.h"
 #include "dbhelper.h"
 

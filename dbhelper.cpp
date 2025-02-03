@@ -37,6 +37,7 @@ bool DBHelper::updateTable(TableModel model){
     int colCount = columns.count();
 
     auto query = QSqlQuery(db);
+
     //Updating existing values
     for(int i = 0; i < minIndex; i++){
 
@@ -59,18 +60,22 @@ bool DBHelper::updateTable(TableModel model){
     //Inserting new records
     if(lastModel.data.count() < model.data.count()){
         for(int i = lastModel.data.count(); i < model.data.count(); i += 5){
-            QString command = "INSERT INTO Workers (id, FullName, Salary, password, nickname) VALUES (";
+            QString command = "INSERT INTO Workers ";
             QString columnTitles = "(", columnValues = "(";
             for(int j = 0; j < colCount; j++){
                 if (j != colCount-1){
-                    columnTitles.append(columns.at(i) + ", ");
-                    columnValues.append(model.data.at(i) + ", ");
+                    columnTitles.append(columns.at(j) + ", ");
+                    columnValues.append("\'" + model.data.at(i + j) + "\'" + ", ");
                 }
                 else{
-                    columnTitles.append(columns.at(i));
-                    columnValues.append(model.data.at(i));
+                    columnTitles.append(columns.at(j));
+                    columnValues.append("\'" + model.data.at(i + j) + + "\'");
                 }
             }
+            command.append(columnTitles);
+            command.append(") VALUES ");
+            command.append(columnValues);
+            command.append(")");
 
             query.exec(command);
         }

@@ -9,7 +9,8 @@ class JsonUtilities
     QStringList columns;
     QStringList dataTypes;
 public:
-    JsonUtilities(QString path);
+    JsonUtilities();
+    bool read(QString path);
     QString getDBPath();
     QStringList getColumns();
     QStringList getTypes();

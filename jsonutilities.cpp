@@ -4,7 +4,10 @@
 #include <QDebug>
 #include <QJsonDocument>
 
-JsonUtilities::JsonUtilities(QString path)
+JsonUtilities::JsonUtilities()
+{ }
+
+bool JsonUtilities::read(QString path)
 {
     QStringList strings;
     QFile file(path);
@@ -18,12 +21,14 @@ JsonUtilities::JsonUtilities(QString path)
     }
     if(strings.count() < 2){
         qDebug() << "Couldn't load the Json config";
+        return false;
     }
     else{
         dbPath = strings.at(0);
         int colCount = strings.count();
         columns = strings.mid(1, colCount / 2);
-        dataTypes = strings.mid(colCount / 2);
+        dataTypes = strings.mid(colCount / 2 + 1);
+        return true;
     }
 }
 

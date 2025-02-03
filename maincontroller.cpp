@@ -13,7 +13,7 @@ MainController::MainController(QWidget *parent)
 }
 
 void saveDefaultJson(){
-    JsonUtilities utilities("data.json");
+    JsonUtilities utilities;
     QStringList strings = {
         "O:/Projects/Work/WorkAssgnment/Database/WorkersDB.db",
         "id",
@@ -31,7 +31,10 @@ void saveDefaultJson(){
 }
 
 void MainController::setup(){
-    JsonUtilities utilities("data.json");
+    JsonUtilities utilities;
+    if(!utilities.read("data.json"))
+        saveDefaultJson();
+
     QString dbPath = utilities.getDBPath();
     QStringList columns = utilities.getColumns();
     QStringList columnTypes = utilities.getTypes();
@@ -48,8 +51,6 @@ void MainController::setup(){
     view->sendModel(model);
     ui->verticalLayout->addWidget(view);
 }
-
-
 
 MainController::~MainController()
 {
